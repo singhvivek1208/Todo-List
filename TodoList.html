@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			background-color:#ffd1ff ;
+		}
+		.task_container{
+			display: flex;
+			margin-top: 2rem;
+		}
+		p{
+			font-size: 60px;
+            text-align: center;
+            color: grey;
+
+		}
+		input{
+			font-size: 40px;
+			padding: 0.8rem;
+			padding-right: 18rem;
+			border-radius: 1rem;
+			margin-left: 20rem;
+            box-shadow: 0 0 15px lightcoral;
+           border: transparent;
+
+		}
+		#btn1{
+			margin-left: 1rem;
+		}
+		.buttons{
+			display: flex;
+			gap: 2rem;
+		}
+		button{
+            font-size: 30px;
+            padding: 0.5rem 0.5rem;
+            box-shadow: 0 0 15px lightcoral;
+            outline: none;
+            border-radius: 1rem;
+            border: transparent;
+            background:linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+           
+            		}
+        ::placeholder{
+        	color: palegoldenrod;
+        	font-weight: bolder;
+        }
+	</style>
+</head>
+<body>
+<p><b>Todo List</p>
+<input type="text" id="inp" placeholder="Enter Your Text">
+<button onclick="task()" id="btn1">Add Text</button>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+	
+	let inp = document.getElementById('inp');
+	let body = document.querySelector('body');
+    const task = ()=>{
+    	let val = inp.value;
+    	if(val != ""){
+    		let box = document.createElement('div');
+    		box.classList.add('task_container');
+    		body.appendChild(box);
+        let task_inp = document.createElement('input');
+        task_inp.setAttribute('readonly','readonly');
+        box.appendChild(task_inp);
+        task_inp.value = val;
+        let btn_box = document.createElement('div');
+        btn_box.classList.add('buttons');
+        box.appendChild(btn_box);
+        let Edit = document.createElement('button');
+        Edit.innerText = "Edit";
+        Edit.addEventListener('click',()=>{
+        if(Edit.innerText=="Edit"){
+        	Edit.innerText= "Save";
+        	task_inp.removeAttribute('readonly');
+        }else{
+        	Edit.innerText="Edit";
+        	task_inp.setAttribute('readonly','readonly');
+        }
+        })
+        btn_box.appendChild(Edit);
+        let del=document.createElement('button');
+        del.innerText = "Delete";
+        del.addEventListener('click',()=>{
+        	box.remove();
+        })
+        btn_box.appendChild(del);
+        inp.value = "";
+    	}else{
+    		swal('Enter your text'); 
+    	}
+    }
+</script>
+</body>
+</html>
